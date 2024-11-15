@@ -1,0 +1,50 @@
+{
+	"pages": [
+    {"path":"pages/home/index","style": {"navigationStyle": "custom"}},
+    {"path":"pages/home/book", "style": {"navigationBarTitleText": ""}},
+    
+    {"path":"pages/user/index", "style": {"navigationBarTitleText": ""}},
+    
+    {"path":"pages/articles/index","style": {"navigationBarTitleText": "uni-app","navigationStyle":"custom"}},
+    {"path":"pages/articles/category", "style":{ "navigationBarTitleText": "分类", "enablePullDownRefresh": true }},
+    {"path":"pages/articles/article", "style":{"navigationBarTitleText":""}},
+    
+    {"path":"pages/network","style": {"navigationBarTitleText": "无网络"}},
+    {"path":"pages/page","style": {"navigationBarTitleText": ""}}
+  ],
+  "subPackages":[],
+	"globalStyle": {
+			"navigationBarBackgroundColor": "@navBgColor",
+			"navigationBarTextStyle": "@navTxtStyle",
+			"backgroundColor": "@bgColor",
+			"backgroundTextStyle": "@bgTxtStyle",
+			"backgroundColorTop": "@bgColorTop",
+			"backgroundColorBottom": "@bgColorBottom"
+	},
+  "tabBar": {
+		"color": "@tabFontColor",
+		"selectedColor": "@tabSelectedColor",
+		"backgroundColor": "@tabBgColor",
+		"borderStyle": "@tabBorderStyle",
+  	"list": [
+      {
+  			"iconPath": "static/images/tabbar/home.png",
+  			"selectedIconPath": "static/images/tabbar/home_fill.png",
+  			"pagePath": "pages/home/index",
+  			"text": "首页"
+  		},
+      // {
+      //   "iconPath": "static/images/tabbar/discover.png",
+      //   "selectedIconPath": "static/images/tabbar/discover_fill.png",
+      //   "pagePath": "pages/audios/index",
+      //   "text": "发现"
+      // },
+  		{
+  			"iconPath": "static/images/tabbar/my.png",
+  			"selectedIconPath": "static/images/tabbar/my_fill.png",
+  			"pagePath": "pages/user/index",
+  			"text": "我的"
+  		}
+  	]
+  }
+}

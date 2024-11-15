@@ -1,0 +1,147 @@
+// 用户登录注册相关样式
+
+.auth.container {
+  width: 750rpx;
+  margin: 0rpx auto;
+  overflow: hidden;
+  padding: 0rpx 50rpx;
+  font-size: 30rpx;
+  box-sizing: border-box;
+  color: var(--rt-text-color);
+
+  .login-title {
+    font-size: 40rpx;
+    margin-top: 100rpx;
+    text-align: center;
+  }
+
+  .input-group {
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    height: 100rpx;
+    line-height: 100rpx;
+    font-size: 30rpx;
+    border-bottom: 1rpx solid #e3e3e3;
+    margin: 50rpx 0rpx 0rpx 0rpx;
+    // background-color: #00b000;
+    position: relative;
+    input.input-control{
+      width: 100%;
+      height: 100%;
+      line-height: 100%;
+      box-sizing: border-box;
+      padding: 0rpx 70rpx;
+      text-indent: 10rpx;
+    }
+    .control-left {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      height: 100rpx;
+      width: 70rpx;
+      position: absolute;
+      left: 0;
+      top: 0;
+      text-align: center;
+      // background-color: #ff1714;
+      .input-control-start {
+        display: block;
+        height: 100rpx;
+        line-height: 100rpx;
+        width: 70rpx;
+        font-size: 30rpx;
+      }
+    }
+    .control-right{
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      height: 100rpx;
+      width: 70rpx;
+      position: absolute;
+      top: 0;
+      right: 0;
+      // background-color: #ffd12e;
+      .iconfont {
+        color: #999;
+        font-size: 40rpx;
+      }
+    }
+  }
+  
+  // 验证码输入框样式覆盖
+  .input-group.code{
+    .control-right{
+      display: flex;
+      align-items: center;
+      width: auto;
+      
+      .send-code-button{
+        display: flex;
+        justify-content: center;
+        width: auto;
+        min-width: 100rpx;
+        height: 60rpx;
+        line-height: 60rpx;
+        text-align: center;
+        padding: 0rpx 15rpx;
+        font-size: var(--rt-font-size-sm);
+        color: var(--rt-text-color);
+        border: 1rpx solid var(--rt-border-color);
+        border-radius: var(--rt-border-radius-base);
+        &::after{
+          border: none;
+        }
+      }
+    }
+    
+  }
+
+
+
+
+
+  .login-button {
+    margin: 30rpx 0rpx 0rpx 0rpx;
+    button {
+      background-image: var(--rt-bg-color);
+    }
+    button:after {
+      border: none;
+    }
+  }
+
+  .login-action {
+    height: 60rpx;
+    line-height: 60rpx;
+    margin-top: 20rpx;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  
+  .login-licence {
+    text-align: center;
+    margin:50rpx 0 0 0;
+    & checkbox-group, & .login-licence-detail{ display: inline-block;}
+    .login-licence-detail{
+      display: inline-block;
+      margin-left: 5rpx;
+      text { margin: 0 5rpx;}
+    }
+    uni-checkbox .uni-checkbox-input{
+      border-radius: 80rpx !important;
+      transform:scale(0.8);
+      position: relative;
+      top: -2rpx;
+    }
+    uni-checkbox.checked .uni-checkbox-input{
+      border-radius: 80rpx !important;
+    }
+  }
+  
+  
+  
+
+}

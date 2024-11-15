@@ -1,0 +1,20 @@
+{
+  "name": "apican",
+  "version": "1.0.1",
+  "description": "API 罐头是一个用于 uniapp 的 http 请求拦截器",
+  "main": "apican.js",
+  "scripts": {
+    "test": "dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vtheme/apican.git"
+  },
+  "keywords": [
+    "uniapp",
+    "http",
+    "interceptor"
+  ],
+  "author": "vtheme",
+  "license": "MIT",
+}

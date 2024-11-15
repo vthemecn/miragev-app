@@ -1,0 +1,51 @@
+// 公共样式文件
+body{
+  font-family: "Lucida Grande", "Lucida Sans Unicode", "Microsoft YaHei UI", "Microsoft YaHei", Helvetica, Arial, Verdana, sans-serif;
+}
+
+// 多行文本溢出
+.one-line{
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
+.two-line{
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  line-height: 50rpx;
+}
+
+// App去除导航栏后改变状态栏样式
+.status_bar {
+  height: var(--status-bar-height);  
+  width: 100%;  
+  background-color: "@navBgColor";
+}
+
+.top_view {
+  height: var(--status-bar-height);  
+  width: 100%;  
+  position: fixed;  
+  background-color: "@navBgColor";  
+  top: 0;  
+  z-index: 999;
+  display: none;
+}
+
+// 按钮公共样式
+.btn{
+  width: 720rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: var(--rt-font-size-base);
+  border-radius: var(--rt-border-radius);
+  background-color: var(--rt-color-warning) !important;
+  color: var(--rt-text-color-inverse) !important;
+}
+
+.btn-default {
+  
+}
+

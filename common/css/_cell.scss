@@ -1,0 +1,50 @@
+// 单元格样式
+
+.cell-item {
+  position: relative;
+  display: flex;
+  width: 750rpx;
+  height: 100rpx;
+  margin: 0rpx 0rpx;
+  padding: 5rpx 15rpx;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+
+  &::after {
+    content: "";
+    display: block;
+    width: 730rpx;
+    height: 0rpx;
+    border-bottom: 1rpx solid var(--rt-border-color);
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+
+  .cell-one {}
+
+  .cell-two {
+    width: 70%;
+    color: #999999;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    .iconfont {
+      margin-left: 8rpx;
+      font-size: 24rpx;
+    }
+  }
+
+}
+
+.cell-item .cell-two .avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  box-shadow: 0 0 1rpx 2rpx var(--rt-border-color);
+}
+

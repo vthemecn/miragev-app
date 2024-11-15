@@ -1,0 +1,33 @@
+// 幻灯片
+
+.swiper-skeleton{
+  width: 750rpx;
+  height: 260rpx;
+  display: flex;
+  justify-content: center;
+  margin: 30rpx auto 0 auto;
+  &::after{
+    content: "";
+    display: block;
+    width: 700rpx;
+    height: 260rpx;
+    background-color: var(--rt-bg-color-grey);
+    border-radius: var(--rt-border-radius-base);
+  }
+}
+
+.swiper{
+  width: 750rpx;
+  height: 260rpx;
+  margin: 30rpx auto 0 auto;
+  swiper-item{
+    display: flex;
+    justify-content: center;
+    image{
+      width: 700rpx;
+      height: 260rpx;
+      border-radius: var(--rt-border-radius-base);
+      overflow: hidden;
+    }
+  }
+}
