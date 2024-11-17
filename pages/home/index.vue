@@ -81,13 +81,13 @@ onLoad(async (e)=>{
     state.categories.push(...e.id.split(','));
   }
   await load();
-  // await loadHot();
+  await loadHot();
 });
   
 onShow(async ()=>{});
 
 async function loadHot(){
-  var hotObject = {id:13, title:'hot'};
+  var hotObject = {id:9, title:'hot'};
   var url = '/wp-json/wp/v2/posts?tags=' + hotObject.id;
   
   try{

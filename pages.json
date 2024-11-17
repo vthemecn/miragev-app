@@ -4,6 +4,7 @@
     {"path":"pages/home/book", "style": {"navigationBarTitleText": ""}},
     
     {"path":"pages/user/index", "style": {"navigationBarTitleText": ""}},
+    {"path":"pages/user/login", "style": {"navigationBarTitleText": ""}},
     
     {"path":"pages/articles/index","style": {"navigationBarTitleText": "uni-app","navigationStyle":"custom"}},
     {"path":"pages/articles/category", "style":{ "navigationBarTitleText": "分类", "enablePullDownRefresh": true }},
