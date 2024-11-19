@@ -49,7 +49,7 @@
       var that = this;
       (async function(){
         if(!e.id){
-          uni.showToast({ title:'参数缺失', icon:'none'});
+          uni.showToast({ title:'缺少ID参数', icon:'none'});
           return;
         }
         try{

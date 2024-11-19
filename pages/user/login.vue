@@ -27,9 +27,9 @@
     <view class="login-licence">
       <text>点击按钮表示您统一并愿意遵守</text>
       <view class="login-licence-detail">
-        <text class="default-light-color" @click="$helper.goto('/pages/page?title=使用协议')">《使用协议》</text>
+        <text class="default-light-color" @click="$helper.goto('/pages/page?id='+state.appUsingId)">《使用协议》</text>
         <text>和</text>
-        <text class="default-light-color" @click="$helper.goto('/pages/page?title=隐私协议')">《隐私协议》</text>
+        <text class="default-light-color" @click="$helper.goto('/pages/page?id='+state.appPrivacyId)">《隐私协议》</text>
       </view>
     </view>
 
@@ -37,78 +37,83 @@
   </view>
 </template>
 
-<script>
+<script setup>
+import { reactive, computed } from 'vue';
+import { onShow } from '@dcloudio/uni-app';
+
 import config from "@/common/config.js";
 import util from "../../common/util.js";  
 import validators from "../../common/validators.js";
-
+import httpUtil from '@/common/http-util.js';
+  
 import { mainStore } from '@/store/main.js';
-import { reactive } from 'vue';
  
-export default {
-  setup() {
-    const state = reactive({
-      msg:'memem'
-    });
-    const store = mainStore();
-    
-    function wxGetUserInfo(){
-      console.log("微信登录。。。");
-      uni.login({
-        provider: 'weixin',
-        success: function (res) {
-          state.msg = res.code;
-          if (res.code) {
-            //发起网络请求
-            uni.request({
-              method: 'POST',
-              url: config.api.url + '/wp-json/vtheme/v1/wxapp-login',
-              data: { code: res.code },
-              success(res) {
-                console.log("请求成功： ", res.data);
-                if( res.data.errcode ){
-                  uni.showToast({
-                    title: "小程序设置错误：" + res.data.errmsg,
-                    icon:'none'
-                  });
-                  return;
-                }
-                state.msg = res.data;
-                
-                const store = mainStore();
-                console.log('res.data', res.data)
-                store.user = res.data.user;
-                
-                try {
-                	uni.setStorageSync('token', res.data.token);
-                	uni.setStorageSync('user', JSON.stringify(res.data.user));
-                } catch (e) {
-                	uni.showToast({ title:"存储 jwt token 错误", icon:'none'});
-                }
-                
-                uni.switchTab({ url:'/pages/user/index' });
-              }
-            });
-          } else {
-            uni.showToast({ title:'登录失败！' + res.errMsg, icon:'none'});
-          }
-        },
-        fail(e) {
-          uni.showToast({ title:'登录失败！' + res.errMsg, icon:'none'});
-        },
-        complete(e) {
-          console.log('完成：', e);
-        }
-      });
-    };
-    
-    return {
-      state,
-      store,
-      wxGetUserInfo,
-    }
+const state = reactive({
+  "appUsingId":"",
+  "appPrivacyId":"",
+});
+const store = mainStore();
+
+onShow(async ()=>{
+  try{
+    let url = '/wp-json/vtheme/v1/index';
+    let res = await httpUtil.request({ url, method:'get' });
+    state.appUsingId = res.data.app_using_id;
+    state.appPrivacyId = res.data.app_privacy_id;
+  }catch(e){
+    uni.showToast({title: "异常 " + e.message});
   }
-}
+})
+
+function wxGetUserInfo(){
+  console.log("微信登录。。。");
+  uni.login({
+    provider: 'weixin',
+    success: function (res) {
+      state.msg = res.code;
+      if (res.code) {
+        //发起网络请求
+        uni.request({
+          method: 'POST',
+          url: config.api.url + '/wp-json/vtheme/v1/wxapp-login',
+          data: { code: res.code },
+          success(res) {
+            console.log("请求成功： ", res.data);
+            if( res.data.errcode ){
+              uni.showToast({
+                title: "小程序设置错误：" + res.data.errmsg,
+                icon:'none'
+              });
+              return;
+            }
+            state.msg = res.data;
+            
+            const store = mainStore();
+            store.user = res.data.user;
+            
+            try {
+              uni.setStorageSync('token', res.data.token);
+              uni.setStorageSync('user', JSON.stringify(res.data.user));
+            } catch (e) {
+              uni.showToast({ title:"存储 jwt token 错误", icon:'none'});
+            }
+            uni.switchTab({ url:'/pages/user/index' });
+          }
+        });
+      } else {
+        uni.showToast({ title:'登录失败！' + res.errMsg, icon:'none'});
+      }
+    },
+    fail(e) {
+      uni.showToast({ title:'登录失败！' + res.errMsg, icon:'none'});
+    },
+    complete(e) {
+      console.log('完成：', e);
+    }
+  });
+};
+  
+
 </script>
 
 <style lang="scss">

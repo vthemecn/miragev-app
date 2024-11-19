@@ -55,7 +55,7 @@
     -->
     
     <view class="option-widget">
-      <view class="option-item" @click="clearCache()">
+      <!-- <view class="option-item" @click="clearCache()">
         <view class="left">
           <image src="../../static/images/fav.png" mode=""></image>
           <text>清理缓存</text>
@@ -64,8 +64,9 @@
           <view class="right-text">{{state.cache}}</view>
           <text class="iconfont">&#xe748;</text>
         </view>
-      </view>
-      <view class="option-item" @click="$helper.goto('/pages/page?id=7')">
+      </view> -->
+      <!-- <view class="option-item" @click="$helper.goto('/pages/page?id=7')"> -->
+      <view class="option-item" @click="gotoAboutPage">
         <view class="left">
           <image src="../../static/images/fav.png" mode=""></image>
           <text>关于</text>
@@ -87,13 +88,23 @@
   import util from '../../common/util';
   import helper from '../../common/helper';
   import config from '../../common/config';
+  import httpUtil from '@/common/http-util.js';
+   
   
   const store = mainStore();
   const state = reactive({
-    cache:'520kb'
+    cache:'520kb',
+    aboutPageId:''
   });
   
-  onShow(()=>{
+  onShow(async ()=>{
+    try{
+      let url = '/wp-json/vtheme/v1/index';
+      let res = await httpUtil.request({ url, method:'get' });
+      state.aboutPageId = res.data.app_about_id;
+    }catch(e){
+      uni.showToast({title: "异常 " + e.message});
+    }
   });
   
   // 清理缓存
@@ -108,6 +119,10 @@
       title:'开发中...',
       icon:'none'
     });
+  }
+  
+  function gotoAboutPage(){
+    helper.goto('/pages/page?id='+state.aboutPageId)
   }
   
 

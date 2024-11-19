@@ -64,7 +64,8 @@ import hotItem from '@/components/hot-item.vue';
 const state = reactive({
     tabIndex: 0,
     articleList:[],
-    categories:[],
+    categories:'',
+    hotIds:'',
     perPage:6,
     pageNo:1,
     isLoading:false,
@@ -77,18 +78,23 @@ function changeIndex(index){
 }
 
 onLoad(async (e)=>{
-  if(e.id){
-    state.categories.push(...e.id.split(','));
+  try{
+    let url = '/wp-json/vtheme/v1/index';
+    let res = await httpUtil.request({ url, method:'get' });
+    state.categories = res.data.app_lastest_ids;
+    state.hotIds = res.data.app_hot_ids;
+    await load(state.categories);
+    await loadHot(state.hotIds);
+  }catch(e){
+    uni.toast({title: "异常 " + e.message});
   }
-  await load();
-  await loadHot();
 });
   
 onShow(async ()=>{});
 
-async function loadHot(){
-  var hotObject = {id:9, title:'hot'};
-  var url = '/wp-json/wp/v2/posts?tags=' + hotObject.id;
+async function loadHot(ids){
+  var url = '/wp-json/wp/v2/posts?per_page=20';
+  if(ids.length){ url = url + "&categories=" + ids.toString(); }
   
   try{
     var res = await httpUtil.request({ url, method:'get' });
@@ -130,12 +136,11 @@ async function refresh (){
   });
 }
 
-async function load(){
+async function load(ids){
   if(state.noMore) return;
   state.isLoading = true;
-  
   var url = '/wp-json/wp/v2/posts?page=' + state.pageNo +'&per_page=' + state.perPage;
-  if(state.categories.length){ url = url + "&categories=" + state.categories.toString(); }
+  if(ids.length){ url = url + "&categories=" + ids.toString(); }
   url += "&_embed";
   
   try{
@@ -184,7 +189,7 @@ async function load(){
 function loadMore(){
   console.log('loadMore....', 'state.isLoading', state.isLoading, state.noMore);
   if(state.isLoading) return;
-  load();
+  load(state.categories);
 }
 
 
